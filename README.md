@@ -18,3 +18,6 @@
     - note down the enterpriseId! It will be used later.
 - an access token created from 1 admin user
 - 
+
+to run any of the scripts:
+`ts-node ./src/<script filename>`

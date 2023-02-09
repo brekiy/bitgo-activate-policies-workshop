@@ -46,14 +46,29 @@ async function startWhitelistPolicyExercise(
 		console.log("task done!");
 		return;
 	}
-	throw new Error("Implement me!");
+	const policyPayload = {
+		coin: 'tsol',
+		id: 'demoWorkshopRule',
+		type: 'advancedWhitelist',
+		condition: {
+			add: {
+				item: '2mL1GH2KAevXzCQ7qVZGeRUd1C1uzrmNvZ5AysK1WPJm',
+				metaData: {
+					label: 'instructorHotWallet',
+					owner: 'zahin',
+				},
+				type: 'walletId',
+			},
+		},
+		action: {
+			type: 'deny',
+		},
+	};
 	const res = await bitgo
 		.post(
 			bitgo.url(`${params.coin}/wallet/${params.walletId}/policy/rule`, 2)
 		)
-		.send({
-			// todo
-		});
+		.send(policyPayload);
 	console.log(res.body);
 	if (res.body.pendingApproval) {
 		console.log("\n\n Pending Approval Required!");
