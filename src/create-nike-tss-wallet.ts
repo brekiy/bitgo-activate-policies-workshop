@@ -7,9 +7,9 @@ const bitgo = new BitGo({ env: "test" });
 
 // login info for your chosen environment
 const supersecretinfo = {
-  un: `username`,
-  pw: `password`,
-  eid: `enterprise id`,
+  un: `xiao-pinghuynh@bitgo.com`,
+  pw: `Y!ecYLncMDRTDC*c$H9$Si5akt0^i6DMHOih@H^B0S`,
+  eid: `63f52bade277e5000771bd2fa6dbd874`,
 }
 
 async function createWallet(params: BasePrompt & CreateWalletPrompt) {
@@ -19,11 +19,13 @@ async function createWallet(params: BasePrompt & CreateWalletPrompt) {
 	const res = await bitgoCoin.wallets().generateWallet({
 		enterprise: supersecretinfo.eid,
 		label:  params.label ? params.label : "TSS wallet " + new Date().toString(),
-		passphrase: supersecretinfo.eid,
+		passphrase: 'abc123',
 		multisigType: 'tss',
 		walletVersion: 3,
+		backupProvider: 'BitGoTrustAsKrs',
 	});
-	console.log(res);
+	console.log('final response', JSON.stringify(res, undefined, 2));
+	console.log('backup keychain', JSON.stringify(res.backupKeychain, undefined, 2));
 	console.log("walletId", res.wallet.id());
 }
 
